@@ -6,3 +6,7 @@
 .search-bar input {
   width: 75%;
 }
+
+.instructor-item img {
+  zoom: 50%;
+}

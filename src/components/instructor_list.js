@@ -6,7 +6,7 @@ import InstructorItem from './instructor_item';
 class InstructorList extends Component {
   renderInstructors() {
     return _.map(this.props.instructors, instructor => {
-      return <InstructorItem instructor={instructor} />
+      return <InstructorItem instructor={instructor} key={ instructor.id } />
     });
   }
 
@@ -16,9 +16,11 @@ class InstructorList extends Component {
     }
 
     return (
-      <ul className="col-md-4 list-group">
-        {this.renderInstructors()}
-      </ul>
+      <div className="row">
+        <ul className="col-md-3 list-group pull-right instructor-list">
+          {this.renderInstructors()}
+        </ul>
+      </div>
     );
   }
 }
