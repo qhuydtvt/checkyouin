@@ -16,10 +16,10 @@ class InstructorList extends Component {
     }
 
     return (
-      <div className="row">
-        <ul className="col-md-3 list-group pull-right instructor-list">
-          {this.renderInstructors()}
-        </ul>
+      <div className="container">
+        <div className="row">
+            {this.renderInstructors()}
+        </div>
       </div>
     );
   }
