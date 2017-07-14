@@ -7,11 +7,18 @@
   width: 75%;
 }
 
+.instructor-item {
+  margin-top: 10px;
+  display: inline-block;
+}
+
 .instructor-item img {
   width: 160px;
   height: 160px;
+  cursor: pointer;
 }
 
 .instructor-name {
   margin-top: 10px;
+  cursor: pointer;
 }

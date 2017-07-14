@@ -16,10 +16,8 @@ class InstructorList extends Component {
     }
 
     return (
-      <div className="container">
-        <div className="row">
-            {this.renderInstructors()}
-        </div>
+      <div className="instructor-list">
+          {this.renderInstructors()}
       </div>
     );
   }
