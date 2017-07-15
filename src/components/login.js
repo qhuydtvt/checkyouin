@@ -28,7 +28,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
       const loginReducer = nextProps.loginReducer;
       if (loginReducer.result === 1) {
-          this.props.history.push("/checkin");
+          this.props.history.replace("/checkin");
       }
   }
 
@@ -53,10 +53,8 @@ class Login extends Component {
           <button type="submit" className="btn btn-success btn-block login-button">Login</button>
         </form>
         {loginReducer.message &&
-          <h5 className="text-danger login-error">{loginReducer.message}</h5>
+          <div className="text-danger login-error">{loginReducer.message}</div>
         }
-        <div>
-        </div>
       </div>
     );
   }
