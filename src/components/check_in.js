@@ -6,8 +6,7 @@ export default class CheckIn extends Component {
   render() {
     return (
       <div>
-        <SearchBar />
-        <InstructorList />
+        Check in
       </div>
     );
   }
