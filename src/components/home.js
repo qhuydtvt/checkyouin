@@ -5,16 +5,17 @@ import Login from './login';
 
 class Home extends Component {
   render() {
-    const {loginReducer} = this.props;
-    const token = sessionStorage.getItem("token");
-    return (token)? <CheckIn /> : <Login />
+    const token = localStorage.getItem("token");
+    const tokenAddedTime = localStorage.getItem("token_added_time");
+    const dayPassed = token ? ((Date.now() - tokenAddedTime) / 86400000) : -1;
+    return (token && dayPassed <= 7)? <CheckIn /> : <Login />
   }
 
   componentWillReceiveProps(newProps) {
     const {loginReducer} = newProps;
     if (loginReducer && loginReducer.token) {
-      console.log("Saving token");
-      sessionStorage.setItem("token", loginReducer.token);
+      localStorage.setItem("token", loginReducer.token);
+      localStorage.setItem("token_added_time", Date.now());
     }
   }
 }
