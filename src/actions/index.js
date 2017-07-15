@@ -7,7 +7,7 @@ const API_ROOT = 'https://script.google.com/macros/s/AKfycbxMRxd-cZdPmaEP7StW6KD
 const COMMAND_SEARCH = "?command=search"
 
 const ROOT_URL = 'https://tk-records.herokuapp.com/api';
-const LOGIN_URL = `${API_ROOT}\login`;
+const LOGIN_URL = `${ROOT_URL}/login`;
 
 export function searchInstructors(term) {
   const request = axios.get(`${API_ROOT}${COMMAND_SEARCH}&term=${term}`);
@@ -19,7 +19,7 @@ export function searchInstructors(term) {
 }
 
 export function login(values, callBack) {
-  const request = axios.post(LOGIN_URL, values).then(() => {callBack();});
+  const request = axios.post(LOGIN_URL, values);
   return {
     type: LOGIN,
     payload: request

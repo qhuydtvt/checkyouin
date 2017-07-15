@@ -20,38 +20,64 @@ class Login extends Component {
   }
 
   onSubmit(values) {
-    // TODO: Login here
+    this.props.login(values, () => {
+        this.props.history.push("/checkin");
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+      const loginReducer = nextProps.loginReducer;
+      if (loginReducer.result === 1) {
+          this.props.history.push("/checkin");
+      }
   }
 
   render() {
     const {handleSubmit} = this.props;
+    const {loginReducer} = this.props;
     return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-          label="Username"
-          name="username"
-          type="text"
-          component={this.renderField}
-        />
-        <Field
-          label="Password"
-          name="password"
-          type="password"
-          component={this.renderField}
-        />
-        <button type="submit" className="btn btn-success">Login</button>
-      </form>
+      <div className="center-block login-wrapper">
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="login-form" >
+          <Field
+            label="Username"
+            name="username"
+            type="text"
+            component={this.renderField}
+          />
+          <Field
+            label="Password"
+            name="password"
+            type="password"
+            component={this.renderField}
+          />
+          <button type="submit" className="btn btn-success btn-block login-button">Login</button>
+        </form>
+        {loginReducer.message &&
+          <h5 className="text-danger login-error">{loginReducer.message}</h5>
+        }
+        <div>
+        </div>
+      </div>
     );
   }
 }
 
 function validate(values) {
   const errors = {};
-
+  if (!values.username) {
+    errors.username = "Username is empty";
+  }
+  if (!values.password) {
+    errors.password = "Password is empty";
+  }
   return errors;
+}
+
+function mapStateToProps({ login }) {
+  return { loginReducer: login };
 }
 
 export default reduxForm({
   validate: validate,
   form: "LoginForm"
-})(connect(null, { login })(Login));
+})(connect(mapStateToProps, { login })(Login));
