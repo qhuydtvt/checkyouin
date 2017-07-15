@@ -5,8 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import promise from 'redux-promise';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import CheckIn from './components/check_in';
-import Login from './components/login';
+import Home from './components/home';
 import reducers from './reducers';
 import './style/style.css';
 
@@ -17,8 +16,7 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path="/checkin" component={CheckIn} />
-          <Route path="/" component={Login} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     </BrowserRouter>

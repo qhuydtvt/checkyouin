@@ -21,16 +21,15 @@ class Login extends Component {
 
   onSubmit(values) {
     this.props.login(values, () => {
-        this.props.history.push("/checkin");
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-      const loginReducer = nextProps.loginReducer;
-      if (loginReducer.result === 1) {
-          this.props.history.replace("/checkin");
-      }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //     const loginReducer = nextProps.loginReducer;
+  //     if (loginReducer.result === 1) {
+  //         this.props.history.replace("/checkin");
+  //     }
+  // }
 
   render() {
     const {handleSubmit} = this.props;
