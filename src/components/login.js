@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { login } from '../actions'
 
 class Login extends Component {
+
   renderField(field) {
     const { meta: {touched, error} } = field;
     const className = `form-group ${touched && error ? "has-danger": ""}`;
@@ -25,8 +26,7 @@ class Login extends Component {
   }
 
   render() {
-    const {handleSubmit} = this.props;
-    const {loginReducer} = this.props;
+    const {handleSubmit, loginReducer} = this.props;
     return (
       <div className="center-block login-wrapper">
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="login-form" >

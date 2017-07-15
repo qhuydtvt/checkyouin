@@ -6,6 +6,7 @@ import Login from './login';
 import { loadTokenFromStorage } from '../actions';
 
 class Home extends Component {
+
   componentDidMount() {
     this.props.loadTokenFromStorage();
   }

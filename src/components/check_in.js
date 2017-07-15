@@ -11,10 +11,12 @@ class CheckIn extends Component {
   render() {
     const {user} = this.props;
 
-    if (!user.name) {
+    if (!user) {
       return <div>Loading...</div>;
     }
-    
+
+    console.log(user);
+
     return (
       <div>
         Hello {user.name}

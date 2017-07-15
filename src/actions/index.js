@@ -8,17 +8,23 @@ const ROOT_URL = 'https://tk-records.herokuapp.com/api';
 const LOGIN_URL = `${ROOT_URL}/login`;
 
 export function login(values, callBack) {
-  const request = axios.post(LOGIN_URL, values).then(res => {
-    const  {result, token} = res;
-    if (result) {
-      localStorage.setItem("token", token);
-      localStorage.setTime("token_added_time", Date.now());
-    }
-    return res;
-  });
+  const request = axios.post(LOGIN_URL, values);
+
+  const tokenInterceptor = function(repsonse) {
+    return new Promise(function(resolve, reject){
+      const {result, token} = repsonse.data;
+      if (result) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("token_added_time", Date.now());
+        axios.defaults.headers.common['x-access-token'] = token;
+      }
+      resolve(repsonse);
+    });
+  };
+
   return {
     type: LOGIN,
-    payload: request
+    payload: request.then(tokenInterceptor)
   };
 }
 
@@ -42,10 +48,10 @@ export function loadTokenFromStorage() {
         payload: token
       };
     }
-
-    return {
-      type: LOAD_TOKEN_FROM_STORAGE,
-      payload: null
-    };
   }
+
+  return {
+    type: LOAD_TOKEN_FROM_STORAGE,
+    payload: null
+  };
 }
