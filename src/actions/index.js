@@ -11,13 +11,14 @@ export function login(values, callBack) {
   const request = axios.post(LOGIN_URL, values);
 
   const tokenInterceptor = function(repsonse) {
+    const {result, token} = repsonse.data;
+    if (result) {
+      localStorage.setItem("token", token);
+      localStorage.setItem("token_added_time", Date.now());
+      axios.defaults.headers.common['x-access-token'] = token;
+    }
+
     return new Promise(function(resolve, reject){
-      const {result, token} = repsonse.data;
-      if (result) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("token_added_time", Date.now());
-        axios.defaults.headers.common['x-access-token'] = token;
-      }
       resolve(repsonse);
     });
   };
