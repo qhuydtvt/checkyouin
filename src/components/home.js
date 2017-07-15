@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import CheckIn from './check_in';
 import Login from './login';
 
+import { loadTokenFromStorage } from '../actions';
+
 class Home extends Component {
-  render() {
-    const token = localStorage.getItem("token");
-    const tokenAddedTime = localStorage.getItem("token_added_time");
-    const dayPassed = token ? ((Date.now() - tokenAddedTime) / 86400000) : -1;
-    return (token && dayPassed <= 7)? <CheckIn /> : <Login />
+  componentDidMount() {
+    this.props.loadTokenFromStorage();
   }
 
-  componentWillReceiveProps(newProps) {
-    const {loginReducer} = newProps;
-    if (loginReducer && loginReducer.token) {
-      localStorage.setItem("token", loginReducer.token);
-      localStorage.setItem("token_added_time", Date.now());
+  render() {
+    const { loginReducer } = this.props;
+    if (loginReducer.token) {
+      return <CheckIn />;
+    } else {
+      return <Login />;
     }
   }
 }
@@ -24,4 +24,4 @@ function mapStateToProps({login}) {
   return {loginReducer: login};
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, { loadTokenFromStorage })(Home);

@@ -24,13 +24,6 @@ class Login extends Component {
     });
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //     const loginReducer = nextProps.loginReducer;
-  //     if (loginReducer.result === 1) {
-  //         this.props.history.replace("/checkin");
-  //     }
-  // }
-
   render() {
     const {handleSubmit} = this.props;
     const {loginReducer} = this.props;

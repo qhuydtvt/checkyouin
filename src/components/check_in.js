@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
-import SearchBar from './search_bar';
-import InstructorList from './instructor_list';
 
-export default class CheckIn extends Component {
+import { fetchCurrentUser } from "../actions";
+import { connect } from 'react-redux';
+
+class CheckIn extends Component {
+  componentDidMount() {
+    this.props.fetchCurrentUser();
+  }
+
   render() {
+    const {user} = this.props;
+
+    if (!user.name) {
+      return <div>Loading...</div>;
+    }
+    
     return (
       <div>
-        Check in
+        Hello {user.name}
       </div>
     );
   }
 }
+
+function mapStateToProps({user}) {
+  return {user};
+}
+
+export default connect(mapStateToProps, { fetchCurrentUser })(CheckIn);
