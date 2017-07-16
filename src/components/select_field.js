@@ -12,7 +12,6 @@ export default function (field) {
       <label>{field.label}</label>
       <Select
         name={field.name}
-        value={field.value}
         options={options}
         {...field.input} onBlur={() => field.input.onBlur(field.value)}
       />

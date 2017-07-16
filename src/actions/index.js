@@ -64,5 +64,5 @@ export function addRecord(values) {
   return {
     type: ADD_RECORD,
     payload: request
-  }
+  };
 }

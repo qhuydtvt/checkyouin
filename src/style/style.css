@@ -21,7 +21,6 @@
 .user-detail {
   margin-left: 40px;
   max-width: 240px;
-  margin-top: 20px;
   display: inline-block;
 }
 
@@ -33,4 +32,8 @@
   margin-left: 50px;
   display: inline-block;
   max-width: 200px;
+}
+
+.default-margin {
+  margin-top: 20px
 }
