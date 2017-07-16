@@ -3,23 +3,9 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { login } from '../actions'
 
+import renderField from './input_field'
+
 class Login extends Component {
-
-  renderField(field) {
-    const { meta: {touched, error} } = field;
-    const className = `form-group ${touched && error ? "has-danger": ""}`;
-
-    return (
-      <div className={className}>
-        <label>{field.label}</label>
-        <input className="form-control" type={field.type} {...field.input}/>
-        <div className="text-help">
-          {touched ? error : ""}
-        </div>
-      </div>
-    );
-  }
-
   onSubmit(values) {
     this.props.login(values, () => {
     });
@@ -34,13 +20,13 @@ class Login extends Component {
             label="Username"
             name="username"
             type="text"
-            component={this.renderField}
+            component={renderField}
           />
           <Field
             label="Password"
             name="password"
             type="password"
-            component={this.renderField}
+            component={renderField}
           />
           <button type="submit" className="btn btn-success btn-block login-button">Login</button>
         </form>

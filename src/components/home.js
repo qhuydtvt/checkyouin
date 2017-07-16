@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CheckIn from './check_in';
+import Profile from './profile';
 import Login from './login';
 
 import { loadTokenFromStorage } from '../actions';
@@ -14,7 +14,7 @@ class Home extends Component {
   render() {
     const { loginReducer } = this.props;
     if (loginReducer.token) {
-      return <CheckIn />;
+      return <Profile />;
     } else {
       return <Login />;
     }

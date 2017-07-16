@@ -2,10 +2,12 @@ import axios from 'axios';
 
 export const LOGIN = "login";
 export const FETCH_USER = "fetch_user";
+export const ADD_RECORD = "add_record";
 export const LOAD_TOKEN_FROM_STORAGE = "load_token_from_storage";
 
 const ROOT_URL = 'https://tk-records.herokuapp.com/api';
 const LOGIN_URL = `${ROOT_URL}/login`;
+const RECORDS_URL = `${ROOT_URL}/records`;
 
 export function login(values, callBack) {
   const request = axios.post(LOGIN_URL, values);
@@ -55,4 +57,12 @@ export function loadTokenFromStorage() {
     type: LOAD_TOKEN_FROM_STORAGE,
     payload: null
   };
+}
+
+export function addRecord(values) {
+  const request = axios.post(RECORDS_URL, values);
+  return {
+    type: ADD_RECORD,
+    payload: request
+  }
 }
