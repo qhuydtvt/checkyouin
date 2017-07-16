@@ -35,5 +35,9 @@
 }
 
 .default-margin {
-  margin-top: 20px
+  margin-top: 10px
+}
+
+.records-today-label {
+  display: inline;
 }
