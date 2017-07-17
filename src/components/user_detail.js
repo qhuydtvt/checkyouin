@@ -13,9 +13,9 @@ class UserDetail extends Component {
       const className = stat._id;
       const count = stat.count;
       return (
-        <div key={className}>
-          <span>{className.toUpperCase()}: </span>
-          <strong>{stat.count}</strong>
+        <div key={className} className='row'>
+          <span className='col-sm-6'>{className.toUpperCase()}: </span>
+          <strong className='col-sm-3'>{stat.count}</strong>
         </div>
       );
     });

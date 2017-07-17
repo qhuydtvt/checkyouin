@@ -30,7 +30,9 @@ class Login extends Component {
   render() {
     const {handleSubmit, loginReducer} = this.props;
     return (
-      <div className="center-block">
+      <div className='row'>
+      <div className="mx-auto col-sm-3"> </div>
+      <div className="mx-auto col-sm-6">
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="login-form" >
           <Field
             label="Username"
@@ -49,6 +51,8 @@ class Login extends Component {
         {loginReducer.message &&
           <div className="text-danger login-error">{loginReducer.message}</div>
         }
+      </div>
+      <div className="mx-auto col-sm-3"> </div>
       </div>
     );
   }
