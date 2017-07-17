@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import renderInputField from './input_field';
-import renderSelectField from './select_field';
 import { addRecord } from '../actions';
+
+import 'react-select/dist/react-select.css';
+import Select, { Creatable } from 'react-select';
+
+import 'flatpickr/dist/themes/light.css';
+import Flatpickr from 'react-flatpickr'
+
 
 class CheckIn extends Component {
   onSubmit(values) {
@@ -12,44 +17,103 @@ class CheckIn extends Component {
     this.props.addRecord(valuesToSubmit);
   }
 
+  renderInputField(field) {
+    const { meta: {touched, error} } = field;
+    const className = `form-group ${touched && error ? "has-danger": ""}`;
+    const type = field.type ? field.type : "";
+    const value = (type == "date") ? new Date().toISOString().substring(0,10): "";
+    return (
+      <div className={`${className} col-sm-3`}>
+        <label className='col-sm-3' >{field.label} </label>
+        <div className='col-sm-9'>
+            <input className="form-control" type={type} {...field.input}/>
+            <div className="text-help">
+              {touched ? error : ""}
+            </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderDateField(field) {
+    const { meta: {touched, error} } = field;
+    const className = `form-group${touched && error ? "has-danger": ""}`;
+    const type = field.type ? field.type : "";
+    const value = (type == "date") ? new Date().toISOString().substring(0,10): "";
+
+    return (
+      <div className={`${className} col-sm-3`}>
+        <label className="col-sm-3">{field.label} </label>
+        <div className='col-sm-9'>
+            <Flatpickr className="form-control" options={{defaultDate: ['2017-07-01']}}  {...field.input}/>
+        </div>
+        <div className="text-help">
+          {touched ? error : ""}
+        </div>
+      </div>
+    );
+  }
+
+  renderSelectField(field) {
+    const { meta: {touched, error} } = field;
+    const className = `form-group ${touched && error ? "has-danger": ""}`;
+    const type = field.type ? field.type : "";
+    const options = field.options;
+    return (
+      <div className={`${className} col-sm-3`}>
+        <label className='col-sm-3'>{field.label}</label>
+        <div className='col-sm-9'>
+          <Creatable
+            name={field.name}
+            options={options}
+            {...field.input} onBlur={() => field.input.onBlur(field.value)}
+          />
+          <div className="text-help">
+            {touched ? error : ""}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { handleSubmit, record } = this.props;
 
     const roleOptions = [
-      {value: "instructor", label:"Instructor"},
-      {value: "coach", label:"Coach"},
-      {value: "other", label:"Other"}
+      {value: "instructor", label: "Instructor"},
+      {value: "coach", label: "Coach"}
     ];
 
     const resultTextClassName = (record.addRecordResult == 1) ? "text-success" : "text-danger";
     return (
-      <div className="form-check-in">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-            label="Class"
-            type="text"
-            name="className"
-            component={renderInputField}
-          />
-          <Field
-            label="Role"
-            type="text"
-            name="role"
-            options={roleOptions}
-            component={renderSelectField}
-          />
-          <Field
-            label="Date"
-            type="date"
-            name="date"
-            component={renderInputField}
-          />
-          <button type="submit" className="btn btn-success">Check you in</button>
-        </form>
-        {record.addRecordMessage &&
-          <div className={`${resultTextClassName} default-margin`}>{record.addRecordMessage}</div>
-        }
-      </div>
+        <div className="row card p-x-1 p-y-1">
+          <h4>Add new record</h4>
+          <form className='m-t-1' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <Field
+              label="Class"
+              type="text"
+              name="className"
+              component={this.renderInputField}
+            />
+            <Field
+              label="Role"
+              type="text"
+              name="role"
+              options={roleOptions}
+              component={this.renderSelectField}
+            />
+            <Field
+              label="Date"
+              type="date"
+              name="date"
+              component={this.renderDateField}
+            />
+            <button type="submit" className="btn btn-success">Add record</button>
+          </form>
+          {record.addRecordMessage &&
+            <div className={`${resultTextClassName}`}>{record.addRecordMessage}</div>
+          }
+        </div>
     );
   }
 }
@@ -71,5 +135,8 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   validate,
-  form: "checkInForm"}
+  form: "checkInForm",
+  initialValues: {
+    date: new Date()
+  }}
 )(connect(mapStateToProps, { addRecord })(CheckIn));

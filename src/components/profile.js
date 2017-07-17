@@ -1,35 +1,24 @@
 import React, { Component } from 'react';
 
-import { fetchCurrentUser } from "../actions";
-import { connect } from 'react-redux';
 import UserDetail from './user_detail';
 import CheckIn from './check_in';
+import History from './history';
 
-class Profile extends Component {
-  componentDidMount() {
-    this.props.fetchCurrentUser();
-  }
+export default class Profile extends Component {
 
   render() {
-    const {user} = this.props;
-
-    if (!user) {
-      return <div>Loading...</div>;
-    }
-
     return (
-      <div className="row">
-        <div className="center-block profile-block">
-          <UserDetail user={ user } />
-          <CheckIn />
+      <div>
+        <div className="row">
+          <div className="col-sm-2">
+            <UserDetail/>
+          </div>
+          <div className="col-sm-9">
+            <CheckIn />
+            <History />
+          </div>
         </div>
       </div>
     );
   }
 }
-
-function mapStateToProps({user}) {
-  return {user};
-}
-
-export default connect(mapStateToProps, { fetchCurrentUser })(Profile);

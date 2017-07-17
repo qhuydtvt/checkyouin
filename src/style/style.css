@@ -1,4 +1,7 @@
-.login-wrapper {
+.wrapper {
+  margin: 20px;
+}
+/*.login-wrapper {
   margin-top: 80px;
   max-width: 384px
 }
@@ -20,24 +23,28 @@
 
 .user-detail {
   margin-left: 40px;
-  max-width: 240px;
+  width: 180px;
   display: inline-block;
 }
 
 .profile-block {
-  max-width: 700px;
+  margin-top: 100px;
 }
 
-.form-check-in {
+.check-in-form {
   margin-left: 50px;
   display: inline-block;
   max-width: 200px;
 }
 
 .default-margin {
-  margin-top: 10px
+  margin-top: 15px
 }
 
 .records-today-label {
   display: inline;
 }
+
+.history {
+  display: inline-block;
+}*/
