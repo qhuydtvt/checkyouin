@@ -12,6 +12,9 @@ export const LOAD_TOKEN_FROM_STORAGE = "load_token_from_storage";
 export const SHOW_CONFIRM_DIALOG = "show_cofirm_dialog";
 export const HIDE_CONFIRM_DIALOG = "hide_confirm_dialog"
 
+export const SHOW_LOGIN_WAIT_INDICATOR = "show_login_indicator";
+export const HIDE_LOGIN_WAIT_INDICATOR = "hide_login_indicator";
+
 const ROOT_URL = 'https://tk-records.herokuapp.com/api';
 const LOGIN_URL = `${ROOT_URL}/login`;
 const RECORDS_URL = `${ROOT_URL}/records`;
@@ -27,6 +30,8 @@ export function login(values, callBack) {
       localStorage.setItem("token_added_time", Date.now());
       axios.defaults.headers.common['x-access-token'] = token;
     }
+
+    callBack();
 
     return new Promise(function(resolve, reject){
       resolve(repsonse);
@@ -142,6 +147,20 @@ export function showConfirmDialog(onConfirm) {
 export function hideConfirmDialog() {
   return {
     type: HIDE_CONFIRM_DIALOG,
+    payload: null
+  };
+}
+
+export function showLoginWaitIndicator() {
+  return {
+    type: SHOW_LOGIN_WAIT_INDICATOR,
+    payload: null
+  };
+}
+
+export function hideLoginWaitIndicator() {
+  return {
+    type: HIDE_LOGIN_WAIT_INDICATOR,
     payload: null
   };
 }

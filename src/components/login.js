@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import ReactLoading from 'react-loading';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { login } from '../actions'
 
+import { login, showLoginWaitIndicator, hideLoginWaitIndicator } from '../actions'
 
 class Login extends Component {
   onSubmit(values) {
+    this.props.showLoginWaitIndicator();
     this.props.login(values, () => {
+      this.props.hideLoginWaitIndicator();
     });
   }
 
@@ -19,7 +22,6 @@ class Login extends Component {
         <div>
             <input className="form-control" type={field.type} {...field.input}/>
         </div>
-
         <div className="text-help">
           {touched ? error : ""}
         </div>
@@ -32,8 +34,8 @@ class Login extends Component {
     const messageClassName = loginReducer.result == 1 ? "text-success" : "text-danger";
     return (
       <div className='row'>
-      <div className="mx-auto col-sm-3"> </div>
-      <div className="mx-auto col-sm-6">
+      <div className="mx-auto col-sm-4"> </div>
+      <div className="mx-auto col-sm-4">
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="login-form" >
           <Field
             label="Username"
@@ -49,11 +51,14 @@ class Login extends Component {
           />
           <button type="submit" className="btn btn-success btn-block login-button">Login</button>
         </form>
+        {loginReducer.isLoading &&
+            <ReactLoading className='center-block' type='bubbles' color="#444" />
+        }
         {loginReducer.message &&
           <div className={messageClassName}>{loginReducer.message}</div>
         }
       </div>
-      <div className="mx-auto col-sm-3"> </div>
+      <div className="mx-auto col-sm-4"> </div>
       </div>
     );
   }
@@ -77,4 +82,4 @@ function mapStateToProps({ login }) {
 export default reduxForm({
   validate: validate,
   form: "LoginForm"
-})(connect(mapStateToProps, { login })(Login));
+})(connect(mapStateToProps, { login, showLoginWaitIndicator, hideLoginWaitIndicator })(Login));
