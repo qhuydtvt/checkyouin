@@ -9,11 +9,13 @@ import Select, { Creatable } from 'react-select';
 import 'flatpickr/dist/themes/light.css';
 import Flatpickr from 'react-flatpickr'
 
-
 class CheckIn extends Component {
   onSubmit(values) {
-    const {date} = values;
-    const valuesToSubmit = {...values, "role": values.role.value, "date":date?date:new Date().toISOString().substring(0,10)};
+    const {date, className} = values;
+    const valuesToSubmit = {
+      className: className,
+      role: values.role.value,
+      date: date? date : new Date().toISOString().substring(0,10)};
     this.props.addRecord(valuesToSubmit, () => this.props.fetchStats());
   }
 
@@ -84,7 +86,6 @@ class CheckIn extends Component {
       {value: "coach", label: "Coach"}
     ];
 
-    const resultTextClassName = (record.addRecordResult == 1) ? "text-success" : "text-danger";
     return (
         <div className="row card p-x-1 p-y-1">
           <h4>Add new record</h4>
@@ -110,9 +111,6 @@ class CheckIn extends Component {
             />
             <button type="submit" className="btn btn-success">Add record</button>
           </form>
-          {record.addRecordMessage &&
-            <div className={`${resultTextClassName} m-t-1`}>{record.addRecordMessage}</div>
-          }
         </div>
     );
   }

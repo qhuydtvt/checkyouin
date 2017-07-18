@@ -12,8 +12,9 @@ class RecordList extends Component {
         const role = record.role;
         const date = record.date;
         const className = record.className;
+        const rowClassName = record.isNew ? "text-success" : ""
         return (
-          <tr key={index}>
+          <tr key={index} className={ rowClassName }>
             <td>{ index + 1 }</td>
             <td>{ date.substring(0, 10) }</td>
             <td>{ className.toUpperCase() }</td>

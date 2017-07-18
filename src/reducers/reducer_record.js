@@ -5,10 +5,9 @@ export default function(state = { pastRecords: [] }, action) {
   switch (action.type) {
     case ADD_RECORD:
       const newRecord = action.payload.data;
-      console.log(state);
+      newRecord.isNew = true;
       return { ...state,
         'addRecordResult': 1,
-        'addRecordMessage': "Record added",
         'pastRecords': [newRecord].concat(state.pastRecords)
       };
     case FETCH_RECORDS:
