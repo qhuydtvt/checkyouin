@@ -44,8 +44,8 @@ class CheckIn extends Component {
     const value = (type == "date") ? new Date().toISOString().substring(0,10): "";
 
     return (
-      <div className={`${className} col-sm-3`}>
-        <label className="col-sm-3">{field.label} </label>
+      <div className={`${className} col-sm-4`}>
+        <label className="col-sm-2">{field.label} </label>
         <div className='col-sm-9'>
             <Flatpickr className="form-control" options={{defaultDate: ['2017-07-01']}}  {...field.input}/>
         </div>
