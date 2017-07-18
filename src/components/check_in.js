@@ -111,7 +111,7 @@ class CheckIn extends Component {
             <button type="submit" className="btn btn-success">Add record</button>
           </form>
           {record.addRecordMessage &&
-            <div className={`${resultTextClassName}`}>{record.addRecordMessage}</div>
+            <div className={`${resultTextClassName} m-t-1`}>{record.addRecordMessage}</div>
           }
         </div>
     );
