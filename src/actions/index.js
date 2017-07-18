@@ -13,7 +13,7 @@ export const LOAD_TOKEN_FROM_STORAGE = "load_token_from_storage";
 const ROOT_URL = 'https://tk-records.herokuapp.com/api';
 const LOGIN_URL = `${ROOT_URL}/login`;
 const RECORDS_URL = `${ROOT_URL}/records`;
-const STATS_URL = `${ROOT_URL}/stats`;
+const STATS_URL = `${ROOT_URL}/stats?startDate=${new Date().toISOString()}`;
 
 export function login(values, callBack) {
   const request = axios.post(LOGIN_URL, values);

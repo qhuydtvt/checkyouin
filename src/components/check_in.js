@@ -17,7 +17,7 @@ class CheckIn extends Component {
     const valuesToSubmit = {
       className: className.replace(/\s/g, ''),
       role: values.role.value,
-      date: date
+      date: new moment(date).toISOString()
     };
     this.props.addRecord(valuesToSubmit, () => this.props.fetchStats());
   }
