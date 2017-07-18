@@ -29,6 +29,7 @@ class Login extends Component {
 
   render() {
     const {handleSubmit, loginReducer} = this.props;
+    const messageClassName = loginReducer.result == 1 ? "text-success" : "text-danger";
     return (
       <div className='row'>
       <div className="mx-auto col-sm-3"> </div>
@@ -49,7 +50,7 @@ class Login extends Component {
           <button type="submit" className="btn btn-success btn-block login-button">Login</button>
         </form>
         {loginReducer.message &&
-          <div className="text-danger login-error">{loginReducer.message}</div>
+          <div className={messageClassName}>{loginReducer.message}</div>
         }
       </div>
       <div className="mx-auto col-sm-3"> </div>

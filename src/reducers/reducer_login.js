@@ -6,7 +6,7 @@ export default function(state={}, action) {
     case LOGIN:
         return _.pick(action.payload.data, ['result', 'message', 'token']);
     case LOGOUT:
-        return { ...state, 'token': null };
+        return { ...state, 'token': null, 'message': 'Logged out', 'result': 1 };
     case LOAD_TOKEN_FROM_STORAGE:
         return { ...state, "token": action.payload };
     default:
