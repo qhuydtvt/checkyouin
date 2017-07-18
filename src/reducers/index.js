@@ -12,7 +12,22 @@ const rootReducer = combineReducers({
     checkInForm : (state, action) => {
       switch (action.type) {
         case ADD_RECORD:
-          return { ...{}, 'values': { date: new Date() } };
+          console.log(state);
+          return { ...state, 'fields': {
+            'className' : {
+              'touched' : false,
+              'visited' : false
+            },
+            'date' : {
+              'touched' : false,
+              'visited' : false
+            },
+            'role' : {
+              'touched' : false,
+              'visited' : false
+            }
+          },
+          'values': { date: new Date() } };
         default:
           return state;
       }
