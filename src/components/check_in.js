@@ -9,13 +9,16 @@ import Select, { Creatable } from 'react-select';
 import 'flatpickr/dist/themes/light.css';
 import Flatpickr from 'react-flatpickr'
 
+import moment from 'moment';
+
 class CheckIn extends Component {
   onSubmit(values) {
     const {date, className} = values;
     const valuesToSubmit = {
       className: className.replace(/\s/g, ''),
       role: values.role.value,
-      date: date? date : new Date().toISOString().substring(0,10)};
+      date: date
+    };
     this.props.addRecord(valuesToSubmit, () => this.props.fetchStats());
   }
 
@@ -135,6 +138,6 @@ export default reduxForm({
   validate,
   form: "checkInForm",
   initialValues: {
-    date: new Date()
+    date: new Date().toISOString()
   }}
 )(connect(mapStateToProps, { addRecord, fetchStats })(CheckIn));

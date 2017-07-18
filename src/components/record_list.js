@@ -3,6 +3,7 @@ import { fetchRecords, deleteRecord } from '../actions';
 import RecordDeleteButton from './record_delete_btn';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import moment from 'moment';
 
 class RecordList extends Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class RecordList extends Component {
         return (
           <tr key={index} className={ rowClassName }>
             <td>{ index + 1 }</td>
-            <td>{ date.substring(0, 10) }</td>
+            <td>{ new moment(date).format('YYYY-MM-DD') }</td>
             <td>{ className.toUpperCase() }</td>
             <td>{ role.charAt(0).toUpperCase() + role.slice(1) }</td>
             <td>

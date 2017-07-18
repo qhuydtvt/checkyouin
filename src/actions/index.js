@@ -84,6 +84,9 @@ export function addRecord(values, callBack) {
     })
   }
 
+  console.log("Adding record");
+  console.log(values);
+
   return {
     type: ADD_RECORD,
     payload: request.then(callBackInterceptor)
