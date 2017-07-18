@@ -13,7 +13,7 @@ class CheckIn extends Component {
   onSubmit(values) {
     const {date, className} = values;
     const valuesToSubmit = {
-      className: className,
+      className: className.replace(/\s/g, ''),
       role: values.role.value,
       date: date? date : new Date().toISOString().substring(0,10)};
     this.props.addRecord(valuesToSubmit, () => this.props.fetchStats());

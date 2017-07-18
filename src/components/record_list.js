@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { fetchRecords } from '../actions';
+import { fetchRecords, deleteRecord } from '../actions';
+import RecordDeleteButton from './record_delete_btn';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 class RecordList extends Component {
   componentDidMount() {
     this.props.fetchRecords('');
   }
 
-  renderPastRecords() {
-    return this.props.record.pastRecords.map(function(record, index) {
+  renderRecords() {
+    return this.props.records.map((record, index) => {
         const role = record.role;
         const date = record.date;
         const className = record.className;
@@ -19,14 +21,17 @@ class RecordList extends Component {
             <td>{ date.substring(0, 10) }</td>
             <td>{ className.toUpperCase() }</td>
             <td>{ role.charAt(0).toUpperCase() + role.slice(1) }</td>
+            <td>
+              <RecordDeleteButton recordId={record._id} />
+            </td>
           </tr>
         );
     });
   }
 
   render() {
-    const { record } = this.props;
-    if (!record.pastRecords) {
+    const { records } = this.props;
+    if (!records) {
       return <div>Loading ... </div>;
     }
 
@@ -39,10 +44,11 @@ class RecordList extends Component {
               <th>Date</th>
               <th>Class</th>
               <th>Role</th>
+              <th></th>
               </tr>
           </thead>
           <tbody>
-              {this.renderPastRecords()}
+              {this.renderRecords()}
           </tbody>
         </table>
       </div>
@@ -50,8 +56,8 @@ class RecordList extends Component {
   }
 }
 
-function mapStateToProps({ record }) {
-  return { record };
+function mapStateToProps({ records }) {
+  return { records };
 }
 
 export default connect(mapStateToProps, { fetchRecords })(RecordList);

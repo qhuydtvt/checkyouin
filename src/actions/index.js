@@ -5,6 +5,7 @@ export const LOGOUT = "logout";
 export const FETCH_USER = "fetch_user";
 export const FETCH_STATS = "fetch_stats";
 export const ADD_RECORD = "add_record";
+export const DELETE_RECORD = "delete_record";
 export const FETCH_RECORDS = "fetch_records";
 export const CLEAR_RECORDS = "clear_records";
 export const LOAD_TOKEN_FROM_STORAGE = "load_token_from_storage";
@@ -93,6 +94,14 @@ export function fetchRecords(className) {
   const request = axios.get(`${RECORDS_URL}?className=${className}`);
   return {
     type: FETCH_RECORDS,
+    payload: request
+  };
+}
+
+export function deleteRecord(recordId) {
+  const request = axios.delete(`${RECORDS_URL}/${recordId}`);
+  return {
+    type: DELETE_RECORD,
     payload: request
   };
 }
