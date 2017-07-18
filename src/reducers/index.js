@@ -3,6 +3,8 @@ import LoginReducer from './reducer_login';
 import UserReducer from './reducer_user';
 import RecordsReducer from './reducer_records';
 import StatsReducer from './reducer_stats';
+import DialogReducer from './reducer_dialog';
+
 import { reducer as formReducer } from 'redux-form';
 
 import { ADD_RECORD } from '../actions';
@@ -35,7 +37,8 @@ const rootReducer = combineReducers({
   login: LoginReducer,
   user: UserReducer,
   records: RecordsReducer,
-  stats: StatsReducer
+  stats: StatsReducer,
+  dialog: DialogReducer
 });
 
 export default rootReducer;

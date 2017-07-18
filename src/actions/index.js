@@ -9,6 +9,8 @@ export const DELETE_RECORD = "delete_record";
 export const FETCH_RECORDS = "fetch_records";
 export const CLEAR_RECORDS = "clear_records";
 export const LOAD_TOKEN_FROM_STORAGE = "load_token_from_storage";
+export const SHOW_CONFIRM_DIALOG = "show_cofirm_dialog";
+export const HIDE_CONFIRM_DIALOG = "hide_confirm_dialog"
 
 const ROOT_URL = 'https://tk-records.herokuapp.com/api';
 const LOGIN_URL = `${ROOT_URL}/login`;
@@ -126,6 +128,20 @@ export function fetchStats() {
 export function clearRecords() {
   return {
     type: CLEAR_RECORDS,
+    payload: null
+  };
+}
+
+export function showConfirmDialog(onConfirm) {
+  return {
+    type: SHOW_CONFIRM_DIALOG,
+    payload: onConfirm
+  };
+}
+
+export function hideConfirmDialog() {
+  return {
+    type: HIDE_CONFIRM_DIALOG,
     payload: null
   };
 }
