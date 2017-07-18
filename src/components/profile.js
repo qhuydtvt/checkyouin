@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 
 import UserDetail from './user_detail';
 import CheckIn from './check_in';
 import History from './history';
+
 
 export default class Profile extends Component {
 

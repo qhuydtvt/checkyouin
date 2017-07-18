@@ -101,11 +101,17 @@ export function fetchRecords(className) {
   };
 }
 
-export function deleteRecord(recordId) {
+export function deleteRecord(recordId, callBack) {
   const request = axios.delete(`${RECORDS_URL}/${recordId}`);
+  const requestInterceptor = function(response) {
+    callBack();
+    return new Promise(function(resolve, reject){
+      resolve(response);
+    });
+  };
   return {
     type: DELETE_RECORD,
-    payload: request
+    payload: request.then(requestInterceptor)
   };
 }
 
