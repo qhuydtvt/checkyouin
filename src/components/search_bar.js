@@ -17,7 +17,7 @@ class SearchBar extends Component {
     300);
     return (
       <div>
-        <input type="text" placeholder='Type class here' onChange={event => onInputChangeWithThrottle(event.target.value)} />
+        <input type="text" placeholder='Search for a class' onChange={event => onInputChangeWithThrottle(event.target.value)} />
       </div>
     );
   }

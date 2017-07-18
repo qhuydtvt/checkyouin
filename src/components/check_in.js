@@ -118,7 +118,7 @@ class CheckIn extends Component {
 
 function validate(values) {
   const errors = {};
-  if (!values.className) {
+  if (!values.className || !values.className.replace(/\s/g, '')) {
     errors.className = "Class is empty";
   }
   if (!values.role) {
