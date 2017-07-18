@@ -12,7 +12,6 @@ const rootReducer = combineReducers({
     checkInForm : (state, action) => {
       switch (action.type) {
         case ADD_RECORD:
-          console.log(state);
           return { ...state, 'fields': {
             'className' : {
               'touched' : false,
