@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { addRecord } from '../actions';
+import { addRecord, fetchStats } from '../actions';
 
 import 'react-select/dist/react-select.css';
 import Select, { Creatable } from 'react-select';
@@ -14,7 +14,7 @@ class CheckIn extends Component {
   onSubmit(values) {
     const {date} = values;
     const valuesToSubmit = {...values, "role": values.role.value, "date":date?date:new Date().toISOString().substring(0,10)};
-    this.props.addRecord(valuesToSubmit);
+    this.props.addRecord(valuesToSubmit, () => this.props.fetchStats());
   }
 
   renderInputField(field) {
@@ -139,4 +139,4 @@ export default reduxForm({
   initialValues: {
     date: new Date()
   }}
-)(connect(mapStateToProps, { addRecord })(CheckIn));
+)(connect(mapStateToProps, { addRecord, fetchStats })(CheckIn));

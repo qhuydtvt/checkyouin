@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import LoginReducer from './reducer_login';
 import UserReducer from './reducer_user';
 import RecordReducer from './reducer_record';
+import StatsReducer from './reducer_stats';
 import { reducer as formReducer } from 'redux-form';
 
 import { ADD_RECORD } from '../actions';
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   }),
   login: LoginReducer,
   user: UserReducer,
-  record: RecordReducer
+  record: RecordReducer,
+  stats: StatsReducer
 });
 
 export default rootReducer;

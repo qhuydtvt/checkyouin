@@ -1,24 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrentUser, logout } from '../actions';
+import Stats from './stats';
 
 class UserDetail extends Component {
   componentDidMount() {
-      this.props.fetchCurrentUser();
-  }
-
-  renderStats() {
-    const {todayRecordsStat} = this.props.user;
-    return todayRecordsStat.map(function(stat) {
-      const className = stat._id;
-      const count = stat.count;
-      return (
-        <div key={className} className='row'>
-          <span className='col-sm-6'>{className.toUpperCase()}: </span>
-          <strong className='col-sm-3'>{stat.count}</strong>
-        </div>
-      );
-    });
+    this.props.fetchCurrentUser();
   }
 
   onLogout() {
@@ -37,7 +24,7 @@ class UserDetail extends Component {
         <h4 className='m-t-1'>{ displayName }</h4>
         <div>
             <div>Records today: </div>
-            {this.renderStats()}
+            <Stats />
         </div>
         <button className="btn btn-default m-t-1" onClick={this.onLogout.bind(this)}>Log out</button>
       </div>

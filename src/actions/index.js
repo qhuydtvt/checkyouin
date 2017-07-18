@@ -3,6 +3,7 @@ import axios from 'axios';
 export const LOGIN = "login";
 export const LOGOUT = "logout";
 export const FETCH_USER = "fetch_user";
+export const FETCH_STATS = "fetch_stats";
 export const ADD_RECORD = "add_record";
 export const FETCH_RECORDS = "fetch_records";
 export const CLEAR_RECORDS = "clear_records";
@@ -11,6 +12,7 @@ export const LOAD_TOKEN_FROM_STORAGE = "load_token_from_storage";
 const ROOT_URL = 'https://tk-records.herokuapp.com/api';
 const LOGIN_URL = `${ROOT_URL}/login`;
 const RECORDS_URL = `${ROOT_URL}/records`;
+const STATS_URL = `${ROOT_URL}/stats`;
 
 export function login(values, callBack) {
   const request = axios.post(LOGIN_URL, values);
@@ -72,11 +74,18 @@ export function loadTokenFromStorage() {
   };
 }
 
-export function addRecord(values) {
+export function addRecord(values, callBack) {
   const request = axios.post(RECORDS_URL, values);
+  const callBackInterceptor = function(response) {
+    callBack();
+    return new Promise((resolve, reject) => {
+      resolve(response);
+    })
+  }
+
   return {
     type: ADD_RECORD,
-    payload: request
+    payload: request.then(callBackInterceptor)
   };
 }
 
@@ -85,12 +94,20 @@ export function fetchRecords(className) {
   return {
     type: FETCH_RECORDS,
     payload: request
-  }
+  };
+}
+
+export function fetchStats() {
+  const request = axios.get(`${STATS_URL}`);
+  return {
+    type: FETCH_STATS,
+    payload: request
+  };
 }
 
 export function clearRecords() {
   return {
     type: CLEAR_RECORDS,
     payload: null
-  }
+  };
 }
