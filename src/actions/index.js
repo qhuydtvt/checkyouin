@@ -18,7 +18,19 @@ export const HIDE_LOGIN_WAIT_INDICATOR = "hide_login_indicator";
 const ROOT_URL = 'https://tk-records.herokuapp.com/api';
 const LOGIN_URL = `${ROOT_URL}/login`;
 const RECORDS_URL = `${ROOT_URL}/records`;
-const STATS_URL = `${ROOT_URL}/stats?startDate=${new Date().toISOString()}`;
+const STATS_URL = `${ROOT_URL}/stats?startDate=${startDate().toISOString()}&endDate=${endDate().toISOString()}`;
+
+function startDate() {
+  var start = new Date();
+  start.setHours(0,0,0,0);
+  return start;
+}
+
+function endDate() {
+  var end = new Date();
+  end.setHours(23,59,59,999);
+  return end;
+}
 
 export function login(values, callBack) {
   const request = axios.post(LOGIN_URL, values);

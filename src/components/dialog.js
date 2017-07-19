@@ -31,7 +31,7 @@ class DialogBox extends Component {
         contentLabel=''
       >
 
-      <h6>Delete records?</h6>
+      <h6>Delete this record?</h6>
       <button className='btn btn-success m-x-1' onClick={this.props.hideConfirmDialog}>No</button>
       <button className='btn btn-danger m-x-1'  onClick={this.onOK.bind(this)}>Yes</button>
       </Modal>
