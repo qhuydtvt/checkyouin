@@ -14,19 +14,19 @@ class UserDetail extends Component {
 
   render() {
     if (!this.props.user) {
-      return <div>Loading...</div>;
+      return (<div>Loading...</div>);
     }
 
     const {displayName, avatar} = this.props.user;
     return (
       <div className="user-detail">
-        <img src={avatar} />
-        <h4 className='m-t-1'>{ displayName }</h4>
-        <div>
-            <div>Records today: </div>
-            <Stats />
+        <p><img src={avatar} alt={displayName} className="rounded img-fluid" /></p>
+        <h4>{ displayName }</h4>
+        <Stats />
+        <hr />
+        <div className="form-group">
+          <button className="btn btn-secondary" onClick={this.onLogout.bind(this)}>Log out</button>
         </div>
-        <button className="btn btn-default m-t-1" onClick={this.onLogout.bind(this)}>Log out</button>
       </div>
     );
   }

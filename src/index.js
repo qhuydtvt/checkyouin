@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import promise from 'redux-promise';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from './components/home';
 
@@ -14,7 +13,7 @@ const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <div className="wrapper">
+    <div className="wrapper container">
       <Home />
     </div>
   </Provider>

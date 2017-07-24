@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { SHOW_CONFIRM_DIALOG, HIDE_CONFIRM_DIALOG } from '../actions';
 
 export default function(state = {}, action) {

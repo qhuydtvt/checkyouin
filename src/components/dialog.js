@@ -30,10 +30,12 @@ class DialogBox extends Component {
         onRequestClose={this.props.hideConfirmDialog}
         contentLabel=''
       >
-
-      <h6>Delete records?</h6>
-      <button className='btn btn-success m-x-1' onClick={this.props.hideConfirmDialog}>No</button>
-      <button className='btn btn-danger m-x-1'  onClick={this.onOK.bind(this)}>Yes</button>
+        <div className="text-center">
+          <h5>Delete records?</h5>
+          <button className='btn btn-primary' onClick={this.props.hideConfirmDialog}>No</button>
+          &nbsp;
+          <button className='btn btn-secondary'  onClick={this.onOK.bind(this)}>Yes</button>
+        </div>
       </Modal>
     );
   }

@@ -7,7 +7,7 @@ class SearchBar extends Component {
 
   onInputChange(term) {
     this.props.clearRecords();
-    this.props.fetchRecords(term.toLowerCase() == 'all' ? '' : term);
+    this.props.fetchRecords(term.toLowerCase() === 'all' ? '' : term);
   }
 
   render() {
@@ -16,9 +16,9 @@ class SearchBar extends Component {
     },
     300);
     return (
-      <div>
-        <input type="text" placeholder='Search for a class' onChange={event => onInputChangeWithThrottle(event.target.value)} />
-      </div>
+      <form className={this.props.className}>
+        <input type="text" className="form-control" placeholder='Search for a class' onChange={event => onInputChangeWithThrottle(event.target.value)} />
+      </form>
     );
   }
 }
