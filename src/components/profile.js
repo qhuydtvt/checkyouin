@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
 
 import UserDetail from './user_detail';
 import CheckIn from './check_in';
@@ -12,11 +11,12 @@ export default class Profile extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-sm-2">
+          <div className="col-sm-3">
             <UserDetail/>
           </div>
           <div className="col-sm-9">
             <CheckIn />
+            <hr />
             <History />
           </div>
         </div>

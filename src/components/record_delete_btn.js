@@ -6,7 +6,7 @@ class RecordDeleteButton extends Component {
   onDelete() {
     const onConfirm = (() => {
       this.props.deleteRecord(this.props.recordId, () => { this.props.fetchStats(); });
-    }).bind(this);
+    });
 
     this.props.showConfirmDialog(onConfirm);
   }

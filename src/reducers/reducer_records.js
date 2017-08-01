@@ -13,7 +13,7 @@ export default function(state = null, action) {
       console.log("record deleted");
       console.log(action.payload.data);
       const deletedRecordId = action.payload.data._id;
-      return _.filter(state, record => deletedRecordId != record._id);
+      return _.filter(state, record => deletedRecordId !== record._id);
     case CLEAR_RECORDS:
       return null;
     default:

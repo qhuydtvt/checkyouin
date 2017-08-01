@@ -1,50 +1,7 @@
 .wrapper {
-  margin: 20px;
-}
-/*.login-wrapper {
-  margin-top: 80px;
-  max-width: 384px
+  margin: 20px auto;
 }
 
-.login-button {
-  margin-top: 30px;
+.login-modal{
+  margin-top: 25vh;
 }
-
-.login-error {
-  margin-top: 30px;
-}
-
-.user-name {
-  margin-top: 20px;
-}
-
-.user-avatar {
-}
-
-.user-detail {
-  margin-left: 40px;
-  width: 180px;
-  display: inline-block;
-}
-
-.profile-block {
-  margin-top: 100px;
-}
-
-.check-in-form {
-  margin-left: 50px;
-  display: inline-block;
-  max-width: 200px;
-}
-
-.default-margin {
-  margin-top: 15px
-}
-
-.records-today-label {
-  display: inline;
-}
-
-.history {
-  display: inline-block;
-}*/

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { fetchRecords } from '../actions';
-import { connect } from 'react-redux';
 
 import SearchBar from './search_bar';
 import RecordList from './record_list';
@@ -10,16 +8,11 @@ class History extends Component {
   render() {
     return (
       <div>
-        <div className="row card p-x-1 p-y-1">
-          <h4>History</h4>
-          <div>
-            <div className="col-sm-9" ></div>
-            <SearchBar className="col-sm-3"/>
-          </div>
-          <div className='m-t-1'>
-            <RecordList/>
-          </div>
-        </div>
+        <p className="row">
+          <h4 className="col-lg-4 col-md-6">History</h4>
+          <SearchBar className="col-lg-4 offset-lg-4 col-md-6"/>
+        </p>
+        <p><RecordList/></p>
         <DialogBox />
       </div>
     );

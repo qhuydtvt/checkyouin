@@ -27,8 +27,7 @@ const rootReducer = combineReducers({
               'touched' : false,
               'visited' : false
             }
-          },
-          'values': { date: new Date().toISOString() } };
+          }};
         default:
           return state;
       }

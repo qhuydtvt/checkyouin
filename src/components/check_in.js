@@ -4,20 +4,25 @@ import { Field, reduxForm } from 'redux-form';
 import { addRecord, fetchStats } from '../actions';
 
 import 'react-select/dist/react-select.css';
-import Select, { Creatable } from 'react-select';
+import { Creatable } from 'react-select';
 
 import 'flatpickr/dist/themes/light.css';
 import Flatpickr from 'react-flatpickr'
 
-import moment from 'moment';
-
 class CheckIn extends Component {
   onSubmit(values) {
     const {date, className} = values;
+    var dateArr = [].concat(date);
+    var dateString = null;
+    if (dateArr[0].toISOString === 'function') {
+      dateString = dateArr[0].toISOString();
+    } else {
+      dateString = dateArr[0];
+    }
     const valuesToSubmit = {
       className: className.replace(/\s/g, ''),
       role: values.role.value,
-      date: new moment(date).toISOString()
+      date: dateString
     };
     this.props.addRecord(valuesToSubmit, () => this.props.fetchStats());
   }
@@ -26,15 +31,12 @@ class CheckIn extends Component {
     const { meta: {touched, error} } = field;
     const className = `form-group ${touched && error ? "has-danger": ""}`;
     const type = field.type ? field.type : "";
-    const value = (type == "date") ? new Date().toISOString().substring(0,10): "";
     return (
-      <div className={`${className} col-sm-3`}>
-        <label className='col-sm-3' >{field.label} </label>
-        <div className='col-sm-9'>
-            <input className="form-control" type={type} {...field.input}/>
-            <div className="text-help">
-              {touched ? error : ""}
-            </div>
+      <div className={`${className} col-md-4`}>
+        <label>{field.label} </label>
+        <input className="form-control" type={type} {...field.input}/>
+        <div className="form-text text-danger">
+          {touched ? error : ""}
         </div>
       </div>
     );
@@ -43,16 +45,12 @@ class CheckIn extends Component {
   renderDateField(field) {
     const { meta: {touched, error} } = field;
     const className = `form-group${touched && error ? "has-danger": ""}`;
-    const type = field.type ? field.type : "";
-    const value = (type == "date") ? new Date().toISOString().substring(0,10): "";
 
     return (
-      <div className={`${className} col-sm-4`}>
-        <label className="col-sm-2">{field.label} </label>
-        <div className='col-sm-9'>
-            <Flatpickr className="form-control" options={{defaultDate: ['2017-07-01']}}  {...field.input}/>
-        </div>
-        <div className="text-help">
+      <div className={`${className} col-md-4`}>
+        <label>{field.label} </label>
+        <Flatpickr className="form-control" options={{defaultDate: ['2017-07-01']}}  {...field.input}/>
+        <div className="form-text text-danger">
           {touched ? error : ""}
         </div>
       </div>
@@ -62,27 +60,24 @@ class CheckIn extends Component {
   renderSelectField(field) {
     const { meta: {touched, error} } = field;
     const className = `form-group ${touched && error ? "has-danger": ""}`;
-    const type = field.type ? field.type : "";
     const options = field.options;
     return (
-      <div className={`${className} col-sm-3`}>
-        <label className='col-sm-3'>{field.label}</label>
-        <div className='col-sm-9'>
-          <Creatable
-            name={field.name}
-            options={options}
-            {...field.input} onBlur={() => field.input.onBlur(field.value)}
-          />
-          <div className="text-help">
-            {touched ? error : ""}
-          </div>
+      <div className={`${className} col-md-4`}>
+      <label>{field.label}</label>
+        <Creatable
+          name={field.name}
+          options={options}
+          {...field.input} onBlur={() => field.input.onBlur(field.value)}
+        />
+        <div className="form-text text-danger">
+          {touched ? error : ""}
         </div>
       </div>
     );
   }
 
   render() {
-    const { handleSubmit, record } = this.props;
+    const { handleSubmit } = this.props;
 
     const roleOptions = [
       {value: "instructor", label: "Instructor"},
@@ -90,9 +85,9 @@ class CheckIn extends Component {
     ];
 
     return (
-        <div className="row card p-x-1 p-y-1">
+        <div>
           <h4>Add new record</h4>
-          <form className='m-t-1' onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <form className="row" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
             <Field
               label="Class"
               type="text"
@@ -112,7 +107,9 @@ class CheckIn extends Component {
               name="date"
               component={this.renderDateField}
             />
-            <button type="submit" className="btn btn-success">Add record</button>
+            <div className="form-group col-12">
+              <button type="submit" className="btn btn-primary">Add record</button>
+            </div>
           </form>
         </div>
     );

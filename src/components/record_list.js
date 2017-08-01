@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { fetchRecords, deleteRecord } from '../actions';
+import { fetchRecords } from '../actions';
 import RecordDeleteButton from './record_delete_btn';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import moment from 'moment';
 
 class RecordList extends Component {
@@ -33,14 +32,14 @@ class RecordList extends Component {
   render() {
     const { records } = this.props;
     if (!records) {
-      return <div>Loading ... </div>;
+      return (<div>Loading ... </div>);
     }
 
     return (
       <div>
-        <table className="table m-t-1">
+        <table className="table table-striped table-hover">
           <thead>
-            <tr>
+            <tr className="bg-primary text-white">
               <th>#</th>
               <th>Date</th>
               <th>Class</th>

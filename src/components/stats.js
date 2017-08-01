@@ -13,7 +13,6 @@ class Stats extends Component {
 
     return stats.map(function(stat) {
       const className = stat._id;
-      const count = stat.count;
       return (
         <li key={className} className='row'>
           <span className='col-sm-6'>{className.toUpperCase()}: </span>
@@ -25,13 +24,19 @@ class Stats extends Component {
 
   render() {
     if (!this.props.stats) {
-      return <div>Loading ...</div>
+      return (<div>Loading ...</div>);
+    }
+    else if (this.props.stats.length < 1){
+      return <div></div>;
     }
 
     return (
-      <ul className="list-group">
-        { this.renderStats() }
-      </ul>
+      <div>
+        <div>Records today: </div>
+        <ul className="list-group">
+          { this.renderStats() }
+        </ul>
+      </div>
     );
   }
 }
