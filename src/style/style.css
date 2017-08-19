@@ -5,3 +5,7 @@
 .login-modal{
   margin-top: 25vh;
 }
+
+.RecordList{
+  overflow-x: auto;
+}

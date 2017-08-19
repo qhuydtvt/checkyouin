@@ -13,8 +13,6 @@ const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-    <div className="wrapper container">
-      <Home />
-    </div>
+    <Home />
   </Provider>
   , document.getElementById('root'));

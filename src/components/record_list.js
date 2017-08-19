@@ -36,7 +36,7 @@ class RecordList extends Component {
     }
 
     return (
-      <div>
+      <div className="RecordList">
         <table className="table table-striped table-hover">
           <thead>
             <tr className="bg-primary text-white">

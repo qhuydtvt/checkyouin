@@ -17,13 +17,15 @@ class Login extends Component {
     const { meta: {touched, error} } = field;
     const className = `form-group row ${touched && error ? "has-danger": ""}`;
     return (
-      <div className={className}>
-        <label className="col-sm-2 col-form-label">{field.label} </label>
-        <div className="col-sm-10">
-            <input className="form-control" type={field.type} {...field.input}/>
-        </div>
-        <div className="text-help">
-          {touched ? error : ""}
+      <div className="wrapper container">
+        <div className={className}>
+          <label className="col-sm-2 col-form-label">{field.label} </label>
+          <div className="col-sm-10">
+              <input className="form-control" type={field.type} {...field.input}/>
+          </div>
+          <div className="text-help">
+            {touched ? error : ""}
+          </div>
         </div>
       </div>
     );
