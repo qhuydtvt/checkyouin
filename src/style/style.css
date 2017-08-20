@@ -9,3 +9,23 @@
 .RecordList{
   overflow-x: auto;
 }
+
+.btn-group .btn-light.active{
+  border: 1px solid #777777;
+}
+
+.new_record{
+  animation: .5s fadein ease-in-out;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    background: #28a745;
+  }
+
+  to {
+    opacity: 1;
+    background: transparent;
+  }
+}

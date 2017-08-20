@@ -11,7 +11,7 @@ import Flatpickr from 'react-flatpickr'
 
 class CheckIn extends Component {
   onSubmit(values) {
-    const {date, className} = values;
+    const {date, className, role} = values;
     var dateArr = [].concat(date);
     var dateString = null;
     if (dateArr[0].toISOString === 'function') {
@@ -21,7 +21,7 @@ class CheckIn extends Component {
     }
     const valuesToSubmit = {
       className: className.replace(/\s/g, ''),
-      role: values.role.value,
+      role: role,
       date: dateString
     };
     this.props.addRecord(valuesToSubmit, () => this.props.fetchStats());
@@ -44,7 +44,7 @@ class CheckIn extends Component {
 
   renderDateField(field) {
     const { meta: {touched, error} } = field;
-    const className = `form-group${touched && error ? "has-danger": ""}`;
+    const className = `form-group ${touched && error ? "has-danger": ""}`;
 
     return (
       <div className={`${className} col-md-4`}>
@@ -57,18 +57,30 @@ class CheckIn extends Component {
     );
   }
 
-  renderSelectField(field) {
+  renderRadioField(field) {
     const { meta: {touched, error} } = field;
     const className = `form-group ${touched && error ? "has-danger": ""}`;
     const options = field.options;
+    const radios = options.map((option, index) => {
+      const className = field.input.value === option.value ? "btn btn-light col-6 active" : "btn btn-light col-6";
+
+      return (
+        <label key={index} className={className}>
+          <input type="radio" checked={field.input.value === option.value} {...field.input} value={option.value}/>
+          {' '}
+          {option.label}
+        </label>
+      )
+    });
+
     return (
       <div className={`${className} col-md-4`}>
-      <label>{field.label}</label>
-        <Creatable
-          name={field.name}
-          options={options}
-          {...field.input} onBlur={() => field.input.onBlur(field.value)}
-        />
+        <label>{field.label}</label>
+        <div>
+          <div className="btn-group d-flex" data-toggle="buttons">
+            {radios}
+          </div>
+        </div>
         <div className="form-text text-danger">
           {touched ? error : ""}
         </div>
@@ -99,7 +111,7 @@ class CheckIn extends Component {
               type="text"
               name="role"
               options={roleOptions}
-              component={this.renderSelectField}
+              component={this.renderRadioField}
             />
             <Field
               label="Date"
@@ -135,6 +147,7 @@ export default reduxForm({
   validate,
   form: "checkInForm",
   initialValues: {
+    role: "instructor",
     date: new Date().toISOString()
   }}
 )(connect(mapStateToProps, { addRecord, fetchStats })(CheckIn));
