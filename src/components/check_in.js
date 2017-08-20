@@ -4,10 +4,9 @@ import { Field, reduxForm } from 'redux-form';
 import { addRecord, fetchStats } from '../actions';
 
 import 'react-select/dist/react-select.css';
-import { Creatable } from 'react-select';
 
 import 'flatpickr/dist/themes/light.css';
-import Flatpickr from 'react-flatpickr'
+import Flatpickr from 'react-flatpickr';
 
 class CheckIn extends Component {
   onSubmit(values) {
