@@ -17,7 +17,7 @@ class UserDetailMobile extends Component {
 
     return (
       <div className="container">
-        <span className="navbar-brand">{ displayName }</span>
+        <span className="navbar-brand mr-auto">{ displayName }</span>
 
         <button onClick={this.onLogout.bind(this)} className="btn btn-outline-info my-2 my-sm-0">Logout</button>
       </div>
