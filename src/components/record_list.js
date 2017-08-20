@@ -18,8 +18,8 @@ class RecordList extends Component {
         return (
           <tr key={index} className={ rowClassName }>
             <td>{ index + 1 }</td>
-            <td>{ new moment(date).format('YYYY-MM-DD') }</td>
-            <td>{ className.toUpperCase() }</td>
+            <td className="nowrap">{ new moment(date).format('DD/MM/YYYY') }</td>
+            <td className="class_name">{ className.toUpperCase() }</td>
             <td>{ role.charAt(0).toUpperCase() + role.slice(1) }</td>
             <td>
               <RecordDeleteButton recordId={record._id} />
